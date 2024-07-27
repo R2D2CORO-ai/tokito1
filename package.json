@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "image-data-uri": "^2.0.1",
+    "pg": "^8.11.5",
+    "socket.io": "^2.2.0"
+  }
+}
