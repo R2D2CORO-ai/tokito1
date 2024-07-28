@@ -1,0 +1,154 @@
+body{
+    background-image: url("../img/fondo.png");
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+#bardos{  /* Descripcion de canvas   */ 
+    /*max-width: 500px;*/
+    width: 700px;
+    height: 600px;
+} 
+#bar_div{
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+    z-index: 7;
+}
+#linea_div{
+    position: absolute;
+    top: 7%;
+    right: 5%;
+}
+#linea {
+    width: 700px;
+    height: 600px
+}
+#pay_div{
+    position: absolute;
+    bottom: 15%;
+    right: 15%;
+}
+#pay{
+    width: 300px;
+    height: 200px;
+}
+#IA_logo{
+    width: 10%;
+    bottom: 5%;
+    position: absolute;
+    left: 15%;
+    z-index: 2;
+}
+#Sanmina{
+    width: 7%;
+    bottom: 5%;
+    position: absolute;
+    right: 3%;
+}
+#tesla {
+    width: 11%;
+    bottom: 5%;
+    position: absolute;
+    left: 45%;
+}
+#fondo{
+    width: 55%;
+    height: 110%;
+    top: 0%;
+    position: absolute;
+    left: 0%;
+    z-index: 1;
+}
+#boton{
+    width: 6%;   
+    top: 10%;
+    position: absolute;
+    left: 35%;
+    z-index: 1;
+}
+/*input {
+    width: 25%;
+    position: absolute;
+    top:10%;
+    left:13%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px red;
+    border-bottom: 2px solid red;
+    box-shadow: 2px 2px 4px 0px grey; /*Crea un cuadro son sombreado 
+    width: 250px;
+    z-index: 3;
+  }
+  
+label{
+    position: absolute;
+    top:7%;
+    left: 13%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow:  grey 0.1em 0.1em 0.2em; /*Efecto de sombra en las letras 
+    font-size: 20px;
+    z-index: 4;
+}*/
+
+#st{
+    width: 25%;
+    position: absolute;
+    top:10%;
+    left:13%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow:  grey 0.1em 0.1em 0.2em; /*Efecto de sombra en las letras */
+    font-size: 20px;
+}
+
+
+#Canvascut1{
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    /*box-shadow: 5px 5px grey; */
+    z-index: 6;
+}
+#Canvascut{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+}
+#Canvascut2{
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    /*box-shadow: 5px 5px grey; */
+    z-index: 6;
+}
+#Canvascut3{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+#Canvascut5{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+    /*box-shadow: 5px 5px grey; */
+    z-index: 6;
+}
+#Canvascut4{
+    position: absolute;
+    top: 55%;
+    left: 25%;
+}
+p30_div{
+    box-shadow: 10px 5px 5px grey;
+    z-index: 7;
+}
+#imagen_p10{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+}
+
+
+
+
+
