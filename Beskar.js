@@ -13,13 +13,13 @@ var fs = require('fs');
 var fss = require('fs');
 
 //-------------------------------------------------------------------- Postgres module object -----------------------------------------//
-const { Pool } = require('pg')
-pool = new Pool({
+//const { Pool } = require('pg')
+/*pool = new Pool({
     host: 'localhost',
     user: 'katana',
     password: 'ialab',
     database: 'katana',
-})
+})*/
 let client
 
 
@@ -30,7 +30,7 @@ var io = require('socket.io')(server); //Bind socket.io to our express server.
 io.on('connection', (socket) => {//Un Socket para todos los requerimientos a postgres
 
 
-    socket.on('openclient', async function () { // conexion con main_script
+    /*socket.on('openclient', async function () { // conexion con main_script
         await openconnection()
         console.log("Client on...")
     });
@@ -52,7 +52,7 @@ io.on('connection', (socket) => {//Un Socket para todos los requerimientos a pos
     socket.on('countas', async function (P1011, P1012, P2011, P2012, P3011, P3012, day, semana) {
         countas(P1011, P1012, P2011, P2012, P3011, P3012, day, semana)
         //console.log("estoy en la funcion countas del backend")
-    });
+    });*/
 
     socket.on('plckatana', async function (p) { // comunicacion con la funcion de javascript
         plc(p);
@@ -82,27 +82,27 @@ io.on('connection', (socket) => {//Un Socket para todos los requerimientos a pos
 });//Close io.on
 
 //---------------------------------------------------------------- Funciones para abrir conexion con el cliente pg ---------------------------------------------------------//
-async function openconnection() {
-    client = await pool.connect()
-}
-async function closeconnection() {
+//async function openconnection() {
+//    client = await pool.connect()
+//}
+/*async function closeconnection() {
     return new Promise(async resolve => {
         client.end()
         client.release()
         resolve('resolved')
     })
 }
-
+*/
 //Funcion imprime cuantos clientes estan conectados en la base de datos 
-async function experiment() {
+/*async function experiment() {
     console.log("total", pool.totalCount)
     console.log("idle", pool.idleCount)
     console.log("clientes esperando", pool.waitingCount)
 }
-
+*/
 //---------------------------------- QUERYS ---------------------------------------------------------------//
 //-----------------------------------Funcion inserta  -----------------------------------------------------//
-async function inserta(serial, status, day, fecha, semana, turno, P1011, P1012, P2011, P2012, P3011, P3012, localTimeString) {
+/*async function inserta(serial, status, day, fecha, semana, turno, P1011, P1012, P2011, P2012, P3011, P3012, localTimeString) {
     // return new Promise(async resolve => {
     console.log(serial, status, day, fecha, semana, turno, P1011, P1012, P2011, P2012, P3011, P3012, localTimeString)
     let pg = "INSERT INTO unidades VALUES ('" + serial + "','" + status + "', '" + day + "','" + fecha + "'," + semana + ",'" + turno + "','" + P1011 + "','" + P1012 + "','" + P2011 + "','" + P2012 + "','" + P3011 + "','" + P3012 + "','" + localTimeString + "')"
@@ -114,9 +114,9 @@ async function inserta(serial, status, day, fecha, semana, turno, P1011, P1012, 
         console.log(result.rows)
     })
 }
-
+*/
 //---- Funcion extraccion --//
-async function agrupardias(status, day, semana) {
+/*async function agrupardias(status, day, semana) {
     console.log("estoy en funcion agrupadias")
     let upf = "SELECT COUNT (*) FROM unidades WHERE status = ('" + status + "') AND day = ('" + day + "') AND semana = ('" + semana + "') ";
     client
@@ -124,9 +124,9 @@ async function agrupardias(status, day, semana) {
         .then((result) => { io.emit('qtyD', { result, status, day, semana }); })
         .catch((err) => console.error('Error executing query', err.stack))
 }
-
+*/
 //--------------------------------- Funcion conteo -------------------------------------------------------//
-
+/*
 async function countas(P1011, P1012, P2011, P2012, P3011, P3012, day, semana) { //"SELECT COUNT (*) FROM ubicaciones WHERE ta1 = ('" + ta1 + "') AND day = ('" + day + "') AND semana = ('" + semana + "')"//OR ta2 = ('"+ ta2 +"')"; //AND day = ('" + day + "')  AND semana =("+semana+") 
     console.log("entre a countas", P1011, P1012, P2011, P2012, P3011, P3012, day, semana)
     let tas =
@@ -137,10 +137,10 @@ async function countas(P1011, P1012, P2011, P2012, P3011, P3012, day, semana) { 
         .then((result) => { io.emit('qtytas', { result, P1011, P1012, P2011, P2012, P3011, P3012, day, semana }); })
         .catch((err) => console.error('Error executing query', err.stack))
 }
-
+*/
 
 //--------------------------------- Funcion para buscar existencias --------------------------------------//
-async function existe(estacion, componente, defecto) {
+/*async function existe(estacion, componente, defecto) {
     return new Promise(async resolve => {
         console.log("Entre a consulta exist :) ")
 
@@ -156,7 +156,7 @@ async function existe(estacion, componente, defecto) {
         resolve('resolved');
     })
 }
-
+*/
 
 
 //************************************************************** TCP/IP  **************************************/

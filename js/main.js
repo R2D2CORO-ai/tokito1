@@ -24,6 +24,10 @@ let serial
 let resultado
 let fullimage = document.getElementById('CanvasFHD')
 let fullimagectx = fullimage.getContext('2d')
+let fullimage1 = document.getElementById('CanvasFHD1')
+let fullimagectx1 = fullimage1.getContext('2d')
+let fullimage2 = document.getElementById('CanvasFHD2')
+let fullimagectx2 = fullimage2.getContext('2d')
 let statusf
 let P3011
 let P3012
@@ -43,6 +47,7 @@ let blade3
 let blade4
 let blade5
 let blade6
+let imagen
 let turno_pass_qtyD
 let recortito = document.getElementById('Canvascut')
 let recortitoctx = recortito.getContext('2d')
@@ -70,7 +75,12 @@ let model = new cvstfjs.ObjectDetectionModel()
 let model2 = new cvstfjs.ClassificationModel();
 let model3 = new cvstfjs.ClassificationModel();
 let model4 = new cvstfjs.ClassificationModel();
-
+let image1= new Image()
+image1.src='/muestras/0.jpeg'
+let image2= new Image()
+image2.src='/muestras/1.jpeg'
+let image3= new Image()
+image3.src='/muestras/2.jpeg'
 //--------------------------------------- datos fecha ------------------------//
  //------------------------------- Muestra la hora local --------------------------------//
 const d= new Date();
@@ -155,25 +165,17 @@ async function loadmodel() {
 //----Clasificacion
     await model2.loadModelAsync('./clasificacion1/model.json');
     console.log(model2)
-    
     await model3.loadModelAsync('./clasificacion2/model.json');
     console.log(model3)
     await model4.loadModelAsync('./clasificacion3/model.json');
-    console.log(model3)
+    console.log(model4)
 
 }
 loadmodel()
 
 
 //************************************************************************************** Imagenes de prueba para la funcion loadcapturas*/
-let image = new Image()
-image.src = "/img/p30.png"
 
-let image2 = new Image()
-image2.src = "/img/Camara/img_old/1.jpg"
-
-let image3 = new Image()
-image3.src = "/img/p20.png"
 
 //*************************Socket block */
 const socket = io();
@@ -490,6 +492,8 @@ let linea = new Chart(line_ctx, {
 //open_cam(1)
 //************************************************************************************** Secuencia de prueba */
 /*************Secuencia   */
+open_cam(0)
+
 async function Sequence() {
     document.getElementById('boton').style.visibility = "hidden"
 console.log("soy serial "+serial)
@@ -497,16 +501,24 @@ console.log("soy serial "+serial)
     arryboth = []
     boxpoint = [] // Reinicia valor para retrabajar punto
     desicion = []
-
-    for (point = 0; point < 3; point++) {
+    console.log('abriendo camara')
+        console.log('abri camara')
+        await captureimage(0)
+        console.log('tome foto')
+        await stopcam()
+    for (point = 1; point < 3; point++){
+        console.log('abriendo camara')
         await open_cam(point)
-        console.log("estoy en la camara.. "+point)
-        canbughide()
+        console.log('abri camara')
         await captureimage(point)
-        await URIimage(fullimage, 1)
+        console.log('tome foto')
+        await stopcam()
+    }
+    for (point = 0; point < 3; point++) {
+        await URIimage(fullimage, 1,0,point)
         await predict1(point)
         await recorta(point)
-        await stopcam()
+        
     } // Cierre de for puntos
     
     await evaluaArray() // funcion se coloca fuera de for para evaluar toda la cadena
@@ -516,7 +528,7 @@ console.log("soy serial "+serial)
     if(resultado == true){
         renombra(serial)
     }
-    setTimeout(function fire() { location.reload() }, 8000);// temporizador para limpiar pantalla
+    //setTimeout(function fire() { location.reload() }, 8000);// temporizador para limpiar pantalla
 }
 
 //************************************************************************************** Funciones de procesamiento de imagenes */
@@ -530,17 +542,17 @@ async function recorta(point) { // Recorte de canvas
                 // P3011
                 capturap30tcx.drawImage(fullimage, 8, 285, 1913, 483, 0, 0, 318, 90) // Ajuste de imagen Cropping y resize
                 //console.log("ya esta la imagen")
-                recortitoctx.drawImage(fullimage, coord1[0], coord1[1], coord1[2], coord1[3], 0, 0, recortitoctx.canvas.width, recortitoctx.canvas.height) // coordenada y tamaño de recorte en el canvas 
-                recortitoctx1.drawImage(fullimage, coord1[4], coord1[5], coord1[6], coord1[7], 0, 0, recortitoctx1.canvas.width, recortitoctx1.canvas.height)
+                recortitoctx.drawImage(fullimage, coord1[0], coord1[1], coord1[2], coord1[3], 0, 0, recortito.width, recortito.height) // coordenada y tamaño de recorte en el canvas 
+                recortitoctx1.drawImage(fullimage, coord1[4], coord1[5], coord1[6], coord1[7], 0, 0, recortito1.width, recortito1.height)
                 boxShadow(point)
                 await mlinspector(recortito,coord1[0],0)
-                await URIimage(recortito, 0, statusf)
+                await URIimage(recortito, 0, statusf,point)
                 console.log(typeof(coord1[0]))
                 //pointstatus(1, statusx)
                 allpoints(1, statusf)
                 evalseparate(1, statusf)
                 await mlinspector(recortito1,coord1[4],0)
-                await URIimage(recortito1, 0, statusf)
+                await URIimage(recortito1, 0, statusf,point)
                 //pointstatus(2, statusx)
                 allpoints(2, statusf)
                 evalseparate(2, statusf)
@@ -548,34 +560,34 @@ async function recorta(point) { // Recorte de canvas
                 break;
 
             case 1:
-                recortitoctx2.drawImage(fullimage, coord2[0], coord2[1], coord2[2], coord2[3], 0, 0, recortitoctx2.canvas.width, recortitoctx2.canvas.height)
-                recortitoctx3.drawImage(fullimage, coord2[4], coord2[5], coord2[6], coord2[7], 0, 0, recortitoctx3.canvas.width, recortitoctx3.canvas.height)
-                capturap20tcx.drawImage(fullimage, 184, 315, 1739, 435, 0, 0, 321, 90)
+                recortitoctx2.drawImage(fullimage1, coord2[0], coord2[1], coord2[2], coord2[3], 0, 0, recortito2.width, recortito2.height)
+                recortitoctx3.drawImage(fullimage1, coord2[4], coord2[5], coord2[6], coord2[7], 0, 0, recortito3.width, recortito3.height)
+                capturap20tcx.drawImage(fullimage1, 184, 315, 1739, 435, 0, 0, 321, 90)
                 boxShadow(point)
                 await mlinspector(recortito2,coord2[0],1)
-                await URIimage(recortito2, 2, statusf)
+                await URIimage(recortito2, 2, statusf,point)
                 //pointstatus(3, statusf)
                 allpoints(3, statusf)
                 evalseparate(3, statusf)
                 await mlinspector(recortito3,coord2[4],1)
-                await URIimage(recortito3, 2, statusf)
+                await URIimage(recortito3, 2, statusf,point)
                 //pointstatus(4, statusf)
                 allpoints(4, statusf)
                 evalseparate(4, statusf)
                 await snapshot(point)
                 break;
             case 2:
-                recortitoctx4.drawImage(fullimage, coord3[0], coord3[1], coord3[2], coord3[3], 0, 0, recortitoctx4.canvas.width, recortitoctx4.canvas.height)
-                recortitoctx5.drawImage(fullimage, coord3[4], coord3[5], coord3[6], coord3[7], 0, 0, recortitoctx5.canvas.width, recortitoctx5.canvas.height)
+                recortitoctx4.drawImage(fullimage2, coord3[0], coord3[1], coord3[2], coord3[3], 0, 0, recortito4.width, recortito4.height)
+                recortitoctx5.drawImage(fullimage2, coord3[4], coord3[5], coord3[6], coord3[7], 0, 0, recortito5.width, recortito5.height)
                 capturap10tcx.drawImage(fullimage, 1, 243, 1916, 565, 0, 0, 321, 90)
                 boxShadow(point)
                 await mlinspector(recortito4,coord1[0],2)
-                await URIimage(recortito4, 3, statusf)
+                await URIimage(recortito4, 3, statusf,point)
                 //pointstatus(5, statusf)
                 allpoints(5, statusf)
                 evalseparate(5, statusf)
                 await mlinspector(recortito5,coord1[4],2)
-                await URIimage(recortito5, 3, statusf)
+                await URIimage(recortito5, 3, statusf,point)
                 //pointstatus(6, statusf)
                 allpoints(6, statusf)
                 evalseparate(6, statusf)
@@ -842,13 +854,6 @@ function switchpic(name) {
     resolve('resolved')
     })
 }
-function canbughide() { // funcion para esconder los canvas 
-    return new Promise(async resolve => {
-        document.getElementById('CanvasFHD').style.visibility = "hidden"
-        //document.getElementById('Canvascut').style.visibility = "hidden"
-        resolve('resolved')
-    });
-}
 function canbugshow() { // funcion para ver los canvas 
     document.getElementById('Canvascut').style.visibility = "visible"
 }
@@ -879,14 +884,14 @@ function search(event) {
 
 //************************************************************************************** Funciones de camara*/
 /*Seccion de camaras  */
-function open_cam(point) {// Resolve de 2 segundos
+async function open_cam(point) {// Resolve de 2 segundos
 
     return new Promise(async resolve => {
         let camid
 
-        if (point == 0) { camid = "7ffccdccbbbe0654a537380185fea60d0ff762027dfc9fdbeb89e5aba82450b0" } // Camara 30
-        if (point == 1) { camid = "d3ddaf3314e361c0d6146cbf3feb76236f96aed23c471f0fd6f9b0a69158c955" } // Camara 10
-        if (point == 2) { camid = "fd63c0ff05ca4fd51bccae442604ff87324f0d88103c6983245ffcebfa4ca54d" } // Camara 20
+        if (point == 0) { camid = "0e0725c6eabafb6b73b076175082f98bf380e055eee977c1f57f333f0a9fb818" } // Camara 30
+        if (point == 1) { camid = "86deee42c19d573b2314d4e45517273fe8e6a5f362fa888509907668f18a9335" } // Camara 10
+        if (point == 2) { camid = "b675538a1e68d063dcf6d8be7fdce46f5b7f612505cc07706da564b1d2a45248" } // Camara 20
         const vgaConstraints = {
 
             video: {
@@ -902,16 +907,29 @@ function open_cam(point) {// Resolve de 2 segundos
             console.log(err.name)
             //location.reload()
         })
-        setTimeout(function fire() { resolve('resolved'); }, 1000)
+        setTimeout(function fire() { resolve('resolved'); }, 250)
    
 })
 }
-function captureimage() {// Resolve de 2 segundos
+async function captureimage(point) {// Resolve de 2 segundos
     return new Promise(async resolve => {
-
-        fullimagectx.drawImage(video, 0, 0, fullimage.width, fullimage.height);
+    switch(point){
+        case 0:
+            fullimagectx.drawImage(video, 0, 0, fullimage.width, fullimage.height);
+            console.log('imagen 1')
+            break
+        case 1:
+            fullimagectx1.drawImage(video, 0, 0, fullimage1.width, fullimage1.height);
+            console.log('imagen 2')
+            break
+        case 2:
+            fullimagectx2.drawImage(video, 0, 0, fullimage2.width, fullimage2.height);
+            console.log('imagen 3')
+            break
+        }
+        
         //var dataURI = canvas.toDataURL('image/jpeg');
-        setTimeout(function fire(){resolve('resolved');},500);//Temporal para programacion de secuencia
+        setTimeout(function fire(){resolve('resolved');},800);//Temporal para programacion de secuencia
         resolve('resolved')
     });
 }
@@ -934,7 +952,7 @@ function stopcam() {
           console.log("Camara no encontrada");
         }
     
-        setTimeout(() => resolve('resolved'), 500);
+        setTimeout(() => resolve('resolved'), 50);
       });
     }
 
@@ -971,13 +989,23 @@ async function logsaving(logarray,serial){
 
 /******************************* IA  */
 async function predict1(point) {
-
-    fullimage = document.getElementById('CanvasFHD')
-
     let input_size = model.input_size
-    let image = tf.browser.fromPixels(fullimage, 3)
-    image = tf.image.resizeBilinear(image.expandDims(), [input_size, input_size])
-    let predictions = await model.executeAsync(image)
+
+    switch(point){
+        case 0:
+        imagen = tf.browser.fromPixels(fullimage, 3)
+        break
+        case 1:
+        imagen = tf.browser.fromPixels(fullimage1, 3)
+        break
+        case 2:
+        imagen = tf.browser.fromPixels(fullimage2, 3)
+        break
+
+    }
+    
+    imagen = tf.image.resizeBilinear(imagen.expandDims(), [input_size, input_size])
+    let predictions = await model.executeAsync(imagen)
 
     await highlightResults(predictions, point) //espera a esta funcion para verificar si tiene corto o no
 
@@ -989,11 +1017,11 @@ async function highlightResults(predictions, punto) {
 
         // Check scores
         if (predictions[1][n] > criterio) {
-           
-            bboxLeft = (predictions[0][n][0] * fullimagectx.canvas.width) //900 es el Width de la imagen y hace match con el with del overlay
-            bboxTop = (predictions[0][n][1] * fullimagectx.canvas.height) //540 es el Height de la imagen y hace match con el with del overlay
-            bboxWidth = (predictions[0][n][2] * fullimagectx.canvas.width) - bboxLeft//800 en vez del video.width
-            bboxHeight = (predictions[0][n][3] * fullimagectx.canvas.height) - bboxTop//448 en vez del video.width
+           console.log(predictions[1])
+            bboxLeft = (predictions[0][n][0] * fullimage.width) //900 es el Width de la imagen y hace match con el with del overlay
+            bboxTop = (predictions[0][n][1] * fullimage.height) //540 es el Height de la imagen y hace match con el with del overlay
+            bboxWidth = (predictions[0][n][2] * fullimage.width) - bboxLeft//800 en vez del video.width
+            bboxHeight = (predictions[0][n][3] * fullimage.height) - bboxTop//448 en vez del video.width
             if (punto == 0) {
                 coord1.push(bboxLeft)
                 coord1.push(bboxTop)
@@ -1029,8 +1057,24 @@ function st(st) {
     })
 }
 
-async function URIimage(cut, photo, status) {
-    var dataURI = cut.toDataURL('image/jpeg'); //convierte la imagen
+async function URIimage(cut, photo, status,point) {
+    if(photo==1){
+        switch(point){
+            case 0:
+                var dataURI = fullimage.toDataURL('image/jpeg'); //convierte la imagen
+            break
+            case 1:
+                var dataURI = fullimage1.toDataURL('image/jpeg'); //convierte la imagen
+            break
+            case 2:
+                var dataURI = fullimage2.toDataURL('image/jpeg'); //convierte la imagen
+            break
+        }
+    }
+    else{
+        var dataURI = cut.toDataURL('image/jpeg');
+    }
+    
     var valor = parseInt(Math.random() * (100 ** 10))
    socket.emit('picsaving', dataURI, valor, photo, status); //se llama la funcion savepic con los 3 parametros (conversion de imagen, numero de serial declarado previamente y samples que sera el point)
 }
