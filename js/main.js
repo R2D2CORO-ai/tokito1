@@ -38,25 +38,18 @@ let recortitoctx4 = recortito4.getContext('2d')
 let recortito5 = document.getElementById('Canvascut5')
 let recortitoctx5 = recortito5.getContext('2d')
 const video = document.querySelector('video')
-let capturap30 = document.getElementById('imagen_p30')
-let capturap30tcx = capturap30.getContext('2d')
 
-let capturap20 = document.getElementById('imagen_p20')
-let capturap20tcx = capturap20.getContext('2d')
-
-let capturap10 = document.getElementById('imagen_p10')
-let capturap10tcx = capturap10.getContext('2d')
 let canvasArray=[recortito,recortito1,recortito2,recortito3,recortito4,recortito5]
 let model = new cvstfjs.ObjectDetectionModel()
 let model2 = new cvstfjs.ClassificationModel();
 let model3 = new cvstfjs.ClassificationModel();
 let model4 = new cvstfjs.ClassificationModel();
 let image1= new Image()
-image1.src='/muestras/0.jpeg'
+//image1.src='/muestras/0.jpeg'
 let image2= new Image()
-image2.src='/muestras/1.jpeg'
+//image2.src='/muestras/1.jpeg'
 let image3= new Image()
-image3.src='/muestras/2.jpeg'
+//image3.src='/muestras/2.jpeg'
 //--------------------------------------- datos fecha ------------------------//
  //------------------------------- Muestra la hora local --------------------------------//
 const d= new Date()
@@ -90,13 +83,13 @@ console.log('Semana:',semana);
 const fechaActual = new Date()
 const diaSemana = fechaActual.getDay()
 async function loadmodel() {
-    await model.loadModelAsync('./segmentacion1/model.json') //C:\Users\gdl3_mds\Documents\katana\modelm\New folder
+    await model.loadModelAsync('../segmentacion/model.json') //C:\Users\gdl3_mds\Documents\katana\modelm\New folder
     console.log(model)
-    await model2.loadModelAsync('./clasificacion1/model.json');
+    await model2.loadModelAsync('../clasificacion/P1/model.json');
     console.log(model2)
-    await model3.loadModelAsync('./clasificacion2/model.json');
+    await model3.loadModelAsync('../clasificacion/P2/model.json');
     console.log(model3)
-    await model4.loadModelAsync('./clasificacion3/model.json');
+    await model4.loadModelAsync('../clasificacion/P3/model.json');
     console.log(model4)
 }
 loadmodel()
@@ -158,7 +151,7 @@ function plc_response2(responsevalue){
 }
 open_cam(0)
 async function Sequence() {
-    document.getElementById('boton').style.visibility = "hidden"
+    
     boxpoint = [] // Reinicia valor para retrabajar punto
         await captureimage(0)
         await stopcam()
@@ -194,7 +187,7 @@ async function recorta(point) { // Recorte de canvas
         console.log(canvasctx[point*2])
             canvasctx[point*2].drawImage(fullimageA[point], coord[point][0], coord[point][1], coord[point][2], coord[point][3], 0, 0, canvas[point*2].width, canvas[point*2].height) // coordenada y tamaño de recorte en el canvas 
             canvasctx[point*2+1].drawImage(fullimageA[point], coord[point][4], coord[point][5], coord[point][6], coord[point][7], 0, 0, canvas[point*2+1].width, canvas[point*2+1].height)
-            boxShadow(point)
+            
             await mlinspector(canvas[point*2],coord1[0],point)
             await URIimage(canvas[point*2], point, statusf,point)
             allpoints(point*2+1, statusf)
@@ -207,21 +200,7 @@ async function recorta(point) { // Recorte de canvas
 }
 
 
-function boxShadow(point) {
-    
-    if (point == 0) {
-        document.getElementById("Canvascut").style.boxShadow = "10px 20px 30px rgba(96, 95, 99, 0.75)"
-        document.getElementById("Canvascut1").style.boxShadow = "10px 20px 30px rgba(96, 95, 99, 0.75)"
-    }
-    if (point == 1) {
-        document.getElementById("Canvascut2").style.boxShadow = "10px 20px 30px rgba(96, 95, 99, 0.75)"
-        document.getElementById("Canvascut3").style.boxShadow = "10px 20px 30px rgba(96, 95, 99, 0.75)"
-    }
-    if (point == 2) {
-        document.getElementById("Canvascut4").style.boxShadow = "10px 20px 30px rgba(96, 95, 99, 0.75)"
-        document.getElementById("Canvascut5").style.boxShadow = "10px 20px 30px rgba(96, 95, 99, 0.75)"
-    }
-}
+
 
 //************************************************************************************** Funciones para localizar los Arrays*/
 function allpoints(pot, statusl) {
@@ -250,16 +229,16 @@ async function evaluaArray() {
             idx = boxpoint.indexOf(0, idx + 1);
           }
         if (resultadofinal == false) {
-            await pass()
+            document.getElementById('tarjeta').style.background = '#00ff40'
             pass1 = 1
             plc_response2(pass1)
-            passturno()
+
         } 
         else {
-            await fail(canvasArray[indices[0]],indices)
+            document.getElementById('tarjeta').style.background = '#cf010b'
              pass1 = 0
             plc_response2(pass1)
-            failturno()
+ 
         }
         resultado = resultadofinal
         resolve('resolved')

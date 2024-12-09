@@ -92,7 +92,7 @@ async function savingpic(dataURI, valor, p, status) {
         }
         else {
             fs.mkdir(filePath, (error) => {
-                console.log(error.message);//en caso de que el folder ya exista manda un error y evita hacer otro folder con el mismo nombre.
+                console.log(error);//en caso de que el folder ya exista manda un error y evita hacer otro folder con el mismo nombre.
                 filePath = '' + filePath + '/' + valor + '';
                 ImageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
             });
@@ -105,7 +105,7 @@ async function savingpic2(datauri, serial, sqty) {
     let filePath;
     const ImageDataURI = require('image-data-uri');
     return new Promise(async resolve => {
-        let filePath = 'C:/Users/gdl3_mds/Documents/katana/katana_samples/' + serial + '';//Ruta de las carpetas por serial
+        let filePath = './katana_samples/' + 'serial' + '';//Ruta de las carpetas por serial
         let filevalidation = fs.existsSync(filePath);
         if (filevalidation) {
 

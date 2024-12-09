@@ -1,154 +1,154 @@
-body{
-    background-image: url("../img/fondo.png");
-    background-repeat: no-repeat;
-    z-index: 10;
-}
-#bardos{  /* Descripcion de canvas   */ 
-    /*max-width: 500px;*/
-    width: 700px;
-    height: 600px;
-} 
-#bar_div{
+html, body {
+    height: 100%;
+    margin: 0;
+    background: rgb(34,68,214);
+    background: linear-gradient(0deg, rgba(51,47,170,1) 0%, rgba(0,212,255,1) 100%);
+  }
+
+.Manual{
     position: absolute;
-    bottom: 15%;
-    right: 5%;
-    z-index: 7;
+    right: 1%;
+    top: 1%;
+    width: 70px;
+    height: 70px;
+    background-image: url("../img/btnManual.png");
+    background-size: 70px 70px;
+    border-radius: 10px;
 }
-#linea_div{
+
+.Reset{
     position: absolute;
-    top: 7%;
-    right: 5%;
+    right: 1%;
+    top: 10%;
+    width: 70px;
+    height: 70px;
+    background-image: url("../img/btnReset.png");
+    background-size: 70px 70px;
+    border-radius: 10px;
 }
-#linea {
-    width: 700px;
-    height: 600px
-}
-#pay_div{
+
+.serial{
     position: absolute;
-    bottom: 15%;
-    right: 15%;
-}
-#pay{
-    width: 300px;
-    height: 200px;
-}
-#IA_logo{
-    width: 10%;
-    bottom: 5%;
-    position: absolute;
-    left: 15%;
+    color:white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+    font-style: normal;
     z-index: 2;
+    left: 2%;
+  
 }
-#Sanmina{
-    width: 7%;
-    bottom: 5%;
+#tesla{
+    position: absolute;
+    left: 3%; 
+    bottom: 3%;
+    width: 70px;
+    height: 70px;
+}
+#sanmina{
     position: absolute;
     right: 3%;
+    bottom: 3%;
+    width: 70px;
+    height: 70px;
 }
-#tesla {
-    width: 11%;
+#nombre{
+    position: absolute;
+    right: 8%;
     bottom: 5%;
-    position: absolute;
-    left: 45%;
+    height: 30px;
 }
-#fondo{
-    width: 55%;
-    height: 110%;
-    top: 0%;
-    position: absolute;
-    left: 0%;
-    z-index: 1;
+.contenedor{
+    flex-direction: column;
+    height: 80vh;
+    width: 98vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
 }
-#boton{
-    width: 6%;   
-    top: 10%;
-    position: absolute;
-    left: 35%;
-    z-index: 1;
+.tarjeta{
+    padding: 2px;
+    width: 1400px;
+    height: 300px;
+    background-color: white;
+    border-radius: 40px;
+    bottom: 2%;
+    top:12%;
+    box-shadow: 16px 14px 20px #000000c8;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
-/*input {
-    width: 25%;
+.tarjeta::before{
+    content: "";
     position: absolute;
-    top:10%;
-    left:13%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px red;
-    border-bottom: 2px solid red;
-    box-shadow: 2px 2px 4px 0px grey; /*Crea un cuadro son sombreado 
-    width: 250px;
+    width: 1400px;
+    height: 1500px;
+    background-image: conic-gradient(#3fd6fc 10deg, transparent 90deg,#3fd6fc 210deg, transparent 230deg);
+    animation: rotar 1.5s linear infinite;
+
+}
+.tarjeta::after{
+    content: "";
+    position: absolute;
+    width: 1380px;
+    height: 290px;
+    background-color: white;
+    border-radius: 40px;
+}
+#wait{
+    position: absolute;
+    width: 498px;
+    height: 498px;
+    bottom: calc(31%);
+    left: calc(38%);
     z-index: 3;
-  }
-  
-label{
-    position: absolute;
-    top:7%;
-    left: 13%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-shadow:  grey 0.1em 0.1em 0.2em; /*Efecto de sombra en las letras 
-    font-size: 20px;
-    z-index: 4;
-}*/
+}
+.capturedCanvas{
+    background-color: white;
+    z-index: 2;
+    border-radius: 40px;
+}
+.tarjeta2{
+    z-index: 1;
+    width: 1390px;
+    height: 290px;
+    background-color: white;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes rotar {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+.tarjeta2 canvas{
+    background-color: black;
+    background-image: url("../img/placeHolder.png");
+    margin: 8px 8px 4px 8px;
 
-#st{
-    width: 25%;
-    position: absolute;
-    top:10%;
-    left:13%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-shadow:  grey 0.1em 0.1em 0.2em; /*Efecto de sombra en las letras */
-    font-size: 20px;
+    box-shadow: 10px 20px 30px rgba(96, 95, 99, 0.75);
+    border-radius: 25px;
 }
-
-
-#Canvascut1{
-    position: absolute;
-    top: 25%;
-    left: 40%;
-    /*box-shadow: 5px 5px grey; */
-    z-index: 6;
+.tarjeta2 canvasCutDiv{
+    background-color: white;
+    margin: 20px;
+    border-radius: 25px;
 }
-#Canvascut{
-    position: absolute;
-    top: 25%;
-    left: 25%;
+.tarjeta2 div{
+    background-color: #3fd6fc;
+    margin: 20px;
+    border-radius: 25px;
+    
 }
-#Canvascut2{
-    position: absolute;
-    top: 40%;
-    left: 25%;
-    /*box-shadow: 5px 5px grey; */
-    z-index: 6;
-}
-#Canvascut3{
-    position: absolute;
-    top: 40%;
-    left: 40%;
-}
-#Canvascut5{
-    position: absolute;
-    top: 55%;
-    left: 40%;
-    /*box-shadow: 5px 5px grey; */
-    z-index: 6;
-}
-#Canvascut4{
-    position: absolute;
-    top: 55%;
-    left: 25%;
-}
-p30_div{
-    box-shadow: 10px 5px 5px grey;
-    z-index: 7;
-}
-#imagen_p10{
-    position: absolute;
-    top: 50%;
-    left: 25%;
-}
-
-
-
-
-
