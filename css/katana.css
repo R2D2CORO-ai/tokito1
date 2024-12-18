@@ -1,65 +1,41 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    background: rgb(34,68,214);
-    background: linear-gradient(0deg, rgba(51,47,170,1) 0%, rgba(0,212,255,1) 100%);
-  }
 
-.Manual{
+body{
+    background-image: url("../img/fondo.jpg"); 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+}
+
+
+#tesla {
     position: absolute;
-    right: 1%;
-    top: 1%;
-    width: 70px;
-    height: 70px;
-    background-image: url("../img/btnManual.png");
-    background-size: 70px 70px;
+    width: calc(5%);
+    height: calc(10%);
+    bottom: calc(80%);
+    left: calc(45%);
+
     border-radius: 10px;
+
 }
 
-.Reset{
+.botonmanual{
     position: absolute;
-    right: 1%;
-    top: 10%;
-    width: 70px;
-    height: 70px;
-    background-image: url("../img/btnReset.png");
-    background-size: 70px 70px;
+   
+   width: 200px;
+   height: 50px;
+    bottom: calc(89%);
+    left: calc(90%);
     border-radius: 10px;
+    background-color: rgb(206, 208, 231);
+    color: aliceblue;
+    text-decoration: none;
 }
 
-.serial{
-    position: absolute;
-    color:white;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 40px;
-    font-style: normal;
-    z-index: 2;
-    left: 2%;
-  
-}
-#tesla{
-    position: absolute;
-    left: 3%; 
-    bottom: 3%;
-    width: 70px;
-    height: 70px;
-}
-#sanmina{
-    position: absolute;
-    right: 3%;
-    bottom: 3%;
-    width: 70px;
-    height: 70px;
-}
-#nombre{
-    position: absolute;
-    right: 8%;
-    bottom: 5%;
-    height: 30px;
+#canvasCamara{
+    top: calc(60%);
+    left: calc(43%);
 }
 .contenedor{
-    flex-direction: column;
     height: 80vh;
     width: 98vw;
     display: flex;
@@ -68,11 +44,10 @@ html, body {
     margin: 0;
 }
 .tarjeta{
-    padding: 2px;
-    width: 1400px;
-    height: 300px;
-    background-color: white;
-    border-radius: 40px;
+    width: 1200px;
+    height: 580px;
+    background-color: #101010;
+    border-radius: 10%;
     bottom: 2%;
     top:12%;
     box-shadow: 16px 14px 20px #000000c8;
@@ -86,19 +61,19 @@ html, body {
 .tarjeta::before{
     content: "";
     position: absolute;
-    width: 1400px;
+    width: 1300px;
     height: 1500px;
-    background-image: conic-gradient(#3fd6fc 10deg, transparent 90deg,#3fd6fc 210deg, transparent 230deg);
+    background-image: conic-gradient(#3fd6fc 10deg, transparent 90deg,#00eeff 210deg, transparent 230deg);
     animation: rotar 1.5s linear infinite;
 
 }
 .tarjeta::after{
     content: "";
     position: absolute;
-    width: 1380px;
-    height: 290px;
-    background-color: white;
-    border-radius: 40px;
+    width: 1185px;
+    height: 565px;
+    background-color: #101010;
+    border-radius: 10%;
 }
 #wait{
     position: absolute;
@@ -111,14 +86,14 @@ html, body {
 .capturedCanvas{
     background-color: white;
     z-index: 2;
-    border-radius: 40px;
+    border-radius: 10%;
 }
 .tarjeta2{
     z-index: 1;
-    width: 1390px;
-    height: 290px;
-    background-color: white;
-    border-radius: 40px;
+    width: 1200px;
+    height: 580px;
+    background-color: transparent;
+    border-radius: 10%;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -133,22 +108,4 @@ html, body {
         transform: rotate(360deg);
     }
 }
-.tarjeta2 canvas{
-    background-color: black;
-    background-image: url("../img/placeHolder.png");
-    margin: 8px 8px 4px 8px;
 
-    box-shadow: 10px 20px 30px rgba(96, 95, 99, 0.75);
-    border-radius: 25px;
-}
-.tarjeta2 canvasCutDiv{
-    background-color: white;
-    margin: 20px;
-    border-radius: 25px;
-}
-.tarjeta2 div{
-    background-color: #3fd6fc;
-    margin: 20px;
-    border-radius: 25px;
-    
-}

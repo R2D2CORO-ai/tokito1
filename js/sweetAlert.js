@@ -10,6 +10,7 @@ async function fail(canvas,indices){
         <canvas id="CanvasSweet" width="168" height="168"></canvas>
     </div>`,
     title: "Es una unidad fallida?",*/
+    timer: 2000,
     title: "Error",
     icon: "error",
     //showDenyButton: true,
@@ -41,7 +42,7 @@ async function fail(canvas,indices){
 async function pass(){
   return new Promise(async resolve => {
   Swal.fire({
-    
+    timer: 500,
     icon: 'success',
     title: 'Pass',
     

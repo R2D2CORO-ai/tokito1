@@ -1,0 +1,18 @@
+
+Point 1 Tornillo = 0 --> Fail
+Point 2 Tornillo = 0 --> Fail
+Point 3 Conector = 1 --> Pass
+Point 4 Conector = 0 --> Fail
+Point 5 Conector = 0 --> Fail
+Point 6 Tapon Negro = 0 --> Fail
+Point 7 Etiqueta Amarilla = 1 --> Pass
+Point 8 tornillo = 1 --> Pass
+Point 9 tornillo = 0 --> Fail
+Point 10 Etiqueta Negra = 0 --> Fail
+Point 11 Etiqueta Blanca QR = 1 --> Pass
+Point 12 Conector = 1 --> Pass
+Point 13 Tapon = 1 --> Pass
+Point 14 Tornillo = 0 --> Fail
+Point 15 Tornillo = 0 --> Fail
+Point 16 Tornillos y Etiqueta Negra = 0 --> Fail
+Point 17 Rayones y Abolladuras  = 1 --> Pass

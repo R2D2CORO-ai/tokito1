@@ -5,45 +5,57 @@
     <script src="js\socket.io.js"></script>
     <link rel="stylesheet" href="./css/katana.css" >
     <link rel="icon" type="image/jpg" href="../img/katana.jpg">
-    <script src="js\tensforflow.js"></script>
-    <script src="js\customvision.js"></script>
+    <script src="./js/tensorflow.js"></script>
+    <script src="./js/sweetAlertDoc.js"></script>
+    <script src="./js/customvision.js"></script>
     <meta charset="UTF-8">
    
    
-    <title>Document</title>
+    <title>AudiTesla</title>
 </head>
-<body>
-    <input type="button" class = "Reset">
-    <input type="button" class = "Manual">
+<body>    
     
-    <p id="sn" class = "serial">SN: P1093219-10-G:SBNJ2411201740</p>
+    <img id="tesla" src="./img/teslalogoblanco.png" width="180" height="90" onclick="testsequence()">
+    <button type="button" class="botonmanual">
+      <a href="./manual/Troubleshooting.pdf" download="manual_de_usuario.pdf">VER MANUAL</a>
+    </button>
+  <!-- Seccion de camaras  -->
+  <video hidden autoplay="true" id="video"></video>
+  <canvas hidden id="CanvasFHD" width="1920px" height="1080px"></canvas>
+  <div class="contenedor">
+      <div class="tarjeta">
+          <div id='tarjeta2' class="tarjeta2">
+              <canvas class="capturedCanvas" id="capturedCanvas" width=1185 height=565>
 
-    <div class="contenedor">
-        <div class="tarjeta">
-            <div id='tarjeta2' class="tarjeta2">
-                <div class="canvasCutDiv"><canvas id="Canvascut" width="168" height="168" ></canvas> </div>
-                <div class="canvasCutDiv" ><canvas id="Canvascut1" width="168" height="168"></canvas></div> 
-                <div class="canvasCutDiv1" ><canvas id="Canvascut2" width="168" height="168"></canvas></div> 
-                <div class="canvasCutDiv2" ><canvas id="Canvascut3" width="168" height="168"></canvas> </div>
-                <div class="canvasCutDiv3" ><canvas id="Canvascut4" width="168" height="168"></canvas> </div>
-                <div class="canvasCutDiv4" ><canvas id="Canvascut5" width="168" height="168"></canvas></div> 
-                </canvas>
-            </div>
+              </canvas>
+          </div>
 
-        </div>
-        
-    </div>
-    <canvas id="CanvasFHD" hidden width="1920px" height="1080px"></canvas>
-    <canvas id="CanvasFHD1" hidden width="1920px" height="1080px"></canvas>
-    <canvas id="CanvasFHD2" hidden width="1920px" height="1080px"></canvas>
+      </div>
+  </div>
+  <canvas id="Canvascut" width="170" height="170"></canvas>
+  <canvas id="Canvascut1" width="190" height="179"></canvas> <!--tornillos-->
+  <canvas id="Canvascut2" width="190" height="179"></canvas> <!--tornillos-->
+  <canvas id="Canvascut3" width="806" height="472"></canvas> <!--punto 3 conector 1-->
+  <canvas id="Canvascut4" width="306" height="267"></canvas><!--punto 4 conector 2 (blanco)-->
+  <canvas id="Canvascut5" width="379" height="404"></canvas><!--punto 5 conector 3 (naranja)-->
+  <canvas id="Canvascut6" width="520" height="709"></canvas><!--tapon -->
+  <canvas id="Canvascut7" width="1214" height="470"></canvas><!--etiqueta amarilla-->
+  <canvas id="Canvascut8" width="190" height="179"></canvas> <!--tornillos-->
+  <canvas id="Canvascut9" width="190" height="179"></canvas><!--tornillos-->
+  <canvas id="Canvascut10" width="604" height="447"></canvas><!--etiqueta negra-->
+  <canvas id="Canvascut11" width="1026" height="514"></canvas><!--qr/etiqueta blanca-->
+  <canvas id="Canvascut12" width="413" height="873"></canvas><!--punto 12 conector 4 (naranja grande)-->
+  <canvas id="Canvascut13" width="761" height="413"></canvas><!--tapon -->
+  <canvas id="Canvascut14" width="190" height="179"></canvas><!--tornillos-->
+  <canvas id="Canvascut15" width="190" height="179"><!--tornillos-->
+  <canvas id="Canvascut16" width="86" height="459"></canvas><!-- etiqueta y tornillos-->
+  <canvas id="Canvascut17" width="1185" height="565"></canvas><!--Abolladuras y rayones-->
+  <canvas id="Canvascut17calis" width="1319" height="432"></canvas>
 
-        <img id="tesla" src="img/teslaLogo.png" >
-        <img id="sanmina" src="img/sanminaLogo.png">
-        <img id="nombre" src="img/nombreLogo.png">
-        
-    <!-- Seccion de camaras  -->
-    <video hidden autoplay="true" id="video"></video> <!-- etiqueta de video lleva un Hidden para esconder -->
-    
+
+  <!-- etiqueta de video lleva un Hidden para esconder -->
+  <p hidden id="demo"></p>
     <script src="./js/main.js"></script>
+    <script src="./js/sweetAlert.js"></script>
 </body>
 </html>
